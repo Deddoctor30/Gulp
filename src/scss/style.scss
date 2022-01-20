@@ -1,0 +1,18 @@
+body{
+   background-color: rgb(80, 78, 78);
+   span{
+      color: red;
+   }
+   background-image: url("@img/food-12.jpg") 0 0 no-repeat;
+}
+
+@media (max-width: 1153px) {
+   span {
+      font-size: 25px;
+   }
+}
+@media (max-width: 111px) {
+   body {
+      color: royalblue;
+   }
+}
