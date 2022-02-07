@@ -1,9 +1,5 @@
 .no-webp body {
-  background-image: url("..img/food-12.jpg") 0 0 no-repeat; }
-
-body {
-  background-color: #504e4e;
-}
+  background: url("../img/food-12.jpg") 0 0 no-repeat; }
 
 body span {
   color: red;
@@ -21,4 +17,4 @@ body span {
   }
 }
 
-.webp body { background-image: url(..img/food-12.webp) 0 0 no-repeat; }
+.webp body { background: url(../img/food-12.webp) 0 0 no-repeat; }
