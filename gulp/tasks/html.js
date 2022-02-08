@@ -1,14 +1,8 @@
 import fileinclude from "gulp-file-include"
-
-
-
 // Подключение конвертера WebP
 import webpHtmlNosvg from "gulp-webp-html-nosvg";
-
-
 // Подключение плагина от кеширования (прописывая ключ к файлам)
 import versionNumber from "gulp-version-number";
-
 
 
 export const html = () => {
@@ -21,22 +15,30 @@ export const html = () => {
    )
    .pipe(fileinclude())
    .pipe(app.plugins.replace(/@img\//g, 'img/'))
-   .pipe(webpHtmlNosvg())                          // Вызов плагина WebP
+   .pipe(
+      app.plugins.if(
+         app.isBuild,
+         webpHtmlNosvg()                          // Вызов плагина WebP
+      )
+   )
    .pipe(                                          // Плагин кеширования
-      versionNumber({
-         'value': '%DT%',
-         'append': {
-            'key': '_v',
-            'cover': 0,
-            'to': [
-               'css',
-               'js',
-            ]
-         },
-         'output': {
-            'file': 'gulp/version.json'
-         }
-      })
+      app.plugins.if(
+         app.isBuild,
+         versionNumber({
+            'value': '%DT%',
+            'append': {
+               'key': '_v',
+               'cover': 0,
+               'to': [
+                  'css',
+                  'js',
+               ]
+            },
+            'output': {
+               'file': 'gulp/version.json'
+            }
+         })
+      )
    )
    .pipe(app.gulp.dest(app.path.build.html))
    .pipe(app.plugins.browsersync.stream());
